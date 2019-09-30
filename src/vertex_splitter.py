@@ -3,11 +3,10 @@ import numpy_indexed as npi
 import networkx as nx
 import pandas as pd
 import os
-from meshtoolz.meshdata import MeshData
-from meshtoolz.percolation import renumber_mesh
-from local_connectivity import *
-
 import time
+
+from meshdata import MeshData
+from local_connectivity import *
 
 def split_mesh_along_facets(mesh,
 							split_facets,
@@ -122,10 +121,31 @@ def remove_disconnected_elems_from_mesh(mesh, split_facets, C_elems):
 
 	#Renumber the split vertex numbers 
 	split_facets -= vdiff[split_facets]
-
-	# debugmesh = MeshData(mesh.verts, mesh.elems, facets = split_facets)
-	# debugmesh.save("debugmesh.h5")
-	# os.system("pviewh5 debugmesh.h5: -elems_db_path debugmesh.h5:facets -xdmf_only -xdmf_file facets.xdmf")
-	# os.system("pviewh5 debugmesh.h5:")
-	# exit()
 	return mesh, split_facets, C_elems
+
+def renumber_mesh(mesh, is_removed, return_vdiff = False):
+	mesh.elems = mesh.elems[np.logical_not(is_removed)]
+
+	stranded_verts = np.setdiff1d(np.arange(mesh.verts.shape[0]), np.unique(mesh.elems))
+
+	vdiff = np.zeros(len(mesh.verts), dtype = mesh.elems.dtype)
+		
+	for v in stranded_verts:
+		vdiff[v:] += 1
+
+	#Renumber mesh elements and remove verts
+	mesh.elems -= vdiff[mesh.elems]
+	mesh.verts = np.delete(mesh.verts,
+						   stranded_verts,
+						   axis = 0)
+
+	if mesh.fibres is not None:
+		mesh.fibres = mesh.fibres[np.logical_not(is_removed)]
+
+	if mesh.elem_markers is not None:
+		mesh.elem_markers = mesh.elem_markers[np.logical_not(is_removed)]
+	
+	if return_vdiff:
+		return mesh, vdiff
+	else:
+		return mesh
