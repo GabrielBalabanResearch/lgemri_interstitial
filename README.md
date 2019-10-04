@@ -20,7 +20,7 @@ run the tests use the command
 
 # How to use it
 You will need a medical image and it's segmentation in nifti format, as well as a mesh whose coordinates 
-match the world coordinates in the images (e.g. pixels transformed by the affine transformation matrix.) 
+match the world coordinates in the images (e.g. pixels locations transformed by the affine transformation matrix.) 
 
 ![Example images](/images/example_images.png)
 
