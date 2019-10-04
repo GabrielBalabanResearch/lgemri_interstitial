@@ -5,9 +5,7 @@ local no-flux boundaries which disrupt the flow of electricity (reference upcomi
 
 The cracks are created with the following probability
 
-p = &alpha; I &cos;(&theta;)<sup>a</sup>
-
-h<sub>&theta;</sub>(x) = &theta;<sub>o</sub> x + &theta;<sub>1</sub>x
+p = &alpha; I cos(&theta;)<sup>a</sup>
 
 # Tests
 A few unit-tests are present that check the facet and edge splitters against some simple cases. To
