@@ -24,8 +24,7 @@ match the world coordinates in the images (e.g. pixels locations transformed by 
 
 ![Example images](/images/example_images.png)
 
-One image should contain the raw pixel values, while the other should contain a segmentation of the myocardium and the 
-scar with seperate markers. All areas that are not myocardium or scar should be marked 0. The mesh should be formatted as in 'example_inputs/imageslice_mesh.h5': it should have coordinates, element markers, fibres, and topology. The elements markers should be 0 for nonscar and scar should be marked as in the segmentation image. The fibres are a vector field giving the direction of anisotropy. Cracks will be more likely to occur if the mesh entity is aligned with this direction. The topology is how the coordinates are connected (triangles or tetrahedra).
+The segmentation should mark the myocardium and the scar with seperate markers. All areas that are not myocardium or scar should be marked 0. The mesh should be formatted as in 'example_inputs/imageslice_mesh.h5': it should have coordinates, element markers, fibres, and topology. The elements markers should be 0 for nonscar and scar should be marked as in the segmentation image. The fibres are a vector field giving the direction of anisotropy. Cracks will be more likely to occur if the mesh entity is aligned with this direction. The topology is how the coordinates are connected (triangles or tetrahedra).
 
 The script can then be run with the command
 
