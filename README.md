@@ -5,7 +5,12 @@ local no-flux boundaries which disrupt the flow of electricity (reference upcomi
 
 The cracks are created with the following probability
 
-p = &alpha; I cos(&theta;)<sup>a</sup>
+p = &alpha; I cos(&theta;)<sup>n</sup>
+
+where &alpha; is the global crack density, I the local normalized image intensity, and n, the 
+anisotropy parameter. You can change the parameteres &alpha; and n yourself to get different patterns of cracks.
+The quantity I is determined from the input images, and is the max-min normalized intensity in the areas marked 
+as scars. 
 
 # Tests
 A few unit-tests are present that check the facet and edge splitters against some simple cases. To
@@ -20,10 +25,7 @@ match the world coordinates in the images (e.g. pixels transformed by the affine
 ![Example images](/images/example_images.png)
 
 One image should contain the raw pixel values, while the other should contain a segmentation of the myocardium and the 
-scar with seperate markers. The myocardium should be a complete ring with a blood pool in the middle. All non-myocardial and scar areas should be marked 0. The mesh should be formatted as in 'example_inputs/imageslice_mesh.h5', it should have coordinates, element markers, fibres, and topology. The elements markers should be 0 for
-nonscar and scar should be marked as in the segmentation image. The fibres are a vector field giving the direction
-of anisotropy. Cracks will be more likely to occur if the mesh entity is aligned with this direction. The topology
-is how the coordinates are connected (triangles or tetrahedra).
+scar with seperate markers. All areas that are not myocardium or scar should be marked 0. The mesh should be formatted as in 'example_inputs/imageslice_mesh.h5': it should have coordinates, element markers, fibres, and topology. The elements markers should be 0 for nonscar and scar should be marked as in the segmentation image. The fibres are a vector field giving the direction of anisotropy. Cracks will be more likely to occur if the mesh entity is aligned with this direction. The topology is how the coordinates are connected (triangles or tetrahedra).
 
 The script can then be run with the command
 
