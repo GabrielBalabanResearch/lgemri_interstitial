@@ -127,7 +127,8 @@ def get_lge_facet_elements(mesh, scar_marker):
 	facets_2 = facet_data.iloc[facets_1.index + 1]
 
 	lge_facets = np.array(facets_1[pkeys])
-	lge_elems = np.vstack((np.array(facets_1["elemnum"]), facets_2["elemnum"])).transpose()
+	lge_elems = np.vstack((np.array(facets_1["elemnum"]),
+									facets_2["elemnum"])).transpose()
 	return lge_facets, lge_elems
 
 class ImageMeshLgeRegistration(object):
@@ -145,7 +146,6 @@ class ImageMeshLgeRegistration(object):
 			self.segdata = self.segdata.transpose()
 
 		#Check that image and mesh dimensions match
-	
 		assert len(self.segdata.shape) == self.d
 		assert len(self.imdata.shape) == self.d
 

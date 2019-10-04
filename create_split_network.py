@@ -3,9 +3,9 @@ import nibabel as nib
 from src.meshdata import H5Format
 from src.split_facet_network import facetsplit_mesh
 
-MESHPATH = "example_data/imageslice_mesh.h5"
-IMAGEPATH = "example_data/rawimage.nii"
-SEGPATH = "example_data/segmentation.nii"
+MESHPATH = "example_inputs/imageslice_mesh.h5"
+IMAGEPATH = "example_inputs/rawimage.nii"
+SEGPATH = "example_inputs/segmentation.nii"
 
 
 def main(args):
@@ -35,13 +35,17 @@ if __name__ == "__main__":
 	imgroup = parser.add_argument_group("Images")
 	imgroup.add_argument("-imagepath", default = IMAGEPATH, help = "Path to image intensity data in .nii format")
 	imgroup.add_argument("-segpath", default = SEGPATH, help = "Path to segmentation data in .nii format")	
-	imgroup.add_argument("-mark_scar", default = 3, help = "Marker of enhanced myocardium (scar) in the segmentation (default 3)")
+	imgroup.add_argument("-mark_scar", default = 3, type = int, help = "Marker of enhanced myocardium (scar) in the segmentation (default 3)")
 
 	fibrosisgroup = parser.add_argument_group('Fibrosis Probability Parameters')
 
 	fibrosisgroup.add_argument("-anisotropy",
 								 default = 4.0,
+								 type = float,
 								 help = "Exponent in cos(theta) relation for probability of interstitial fibrosis, where theta is fiber-mesh entity angle (default 4.0).")
-	fibrosisgroup.add_argument("-maxden", default = 1.0, help = "Maximum global scar density parameters (default 1.0).")
+	fibrosisgroup.add_argument("-maxden",
+								 default = 1.0,
+								 type = float,
+								 help = "Maximum global scar density parameters (default 1.0).")
 	args = parser.parse_args()
 	main(args)

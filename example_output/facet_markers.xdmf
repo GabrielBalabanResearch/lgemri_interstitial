@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<Xdmf Version="2.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+			
+	<Domain>
+					
+		<Grid CollectionType="Temporal" GridType="Collection" Name="TimeSeries">
+						  
+			<Time TimeType="List">
+								
+				<DataItem Dimensions="1" Format="XML"> 0 </DataItem>
+							  
+			</Time>
+						 
+			<Grid GridType="Uniform" Name="grid_0">
+							
+				<Topology NumberOfElements="247236" TopologyType="Polyline">
+									
+					<DataItem Dimensions="247236 2" Format="HDF">output_split_mesh.h5:facets </DataItem>
+								
+				</Topology>
+							
+				<Geometry GeometryType="XY">
+									
+					<DataItem Dimensions="88789 2" Format="HDF">output_split_mesh.h5:/coordinates </DataItem>
+								
+				</Geometry>
+							
+				<Attribute AttributeType="Scalar" Center="Cell" Name="facet_markers">
+								
+					<DataItem Dimensions="247236 1" Format="HDF"> output_split_mesh.h5:facet_markers </DataItem>
+							
+				</Attribute>
+							
+			</Grid>
+							
+		</Grid>
+				
+	</Domain>
+		
+</Xdmf>

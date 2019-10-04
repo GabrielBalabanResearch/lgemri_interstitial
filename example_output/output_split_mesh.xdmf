@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<Xdmf Version="2.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+			
+	<Domain>
+					
+		<Grid CollectionType="Temporal" GridType="Collection" Name="TimeSeries">
+						  
+			<Time TimeType="List">
+								
+				<DataItem Dimensions="1" Format="XML"> 0 </DataItem>
+							  
+			</Time>
+						 
+			<Grid GridType="Uniform" Name="grid_0">
+							
+				<Topology NumberOfElements="163858" TopologyType="Triangle">
+									
+					<DataItem Dimensions="163858 3" Format="HDF">output_split_mesh.h5:/topology </DataItem>
+								
+				</Topology>
+							
+				<Geometry GeometryType="XY">
+									
+					<DataItem Dimensions="88789 2" Format="HDF">output_split_mesh.h5:/coordinates </DataItem>
+								
+				</Geometry>
+									
+			</Grid>
+							
+		</Grid>
+				
+	</Domain>
+		
+</Xdmf>
