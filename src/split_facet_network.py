@@ -1,10 +1,12 @@
 from vertex_splitter import split_mesh_along_facets
+from scipy.ndimage.filters import convolve
 import numpy as np
 import numpy_indexed as npi
 import time
 import os
 import pandas as pd
-from meshtoolz import MeshData
+
+MARK_BACKGROUND = 0
 
 def facetsplit_mesh(mesh,
 				    imdata,
@@ -14,6 +16,12 @@ def facetsplit_mesh(mesh,
 				    anisotropy,
 				    transpose = False,
 				    unit_conversion = 1.0):
+	"""
+	Create splits in the mesh 
+	according to the image intensities
+	in imdata where the scars are marked
+	by the scar_markers in seg.
+	"""
 
 	#Make sure elements are int
 	mesh.elems = mesh.elems.astype(int)
@@ -28,9 +36,11 @@ def facetsplit_mesh(mesh,
 	facets = mesh.get_facets()
 	facet_midpoints = np.mean(mesh.verts[facets], axis = 1)
 	elem_midpoints = np.mean(mesh.verts[mesh.elems], axis = 1)
-
 	facet_intensities = regist.register(facet_midpoints)
 	elem_intensities = regist.register(elem_midpoints)
+
+	assert (facet_intensities !=0).any()
+	assert (elem_intensities !=0).any()
 
 	lge_facets, lge_facet_elems = get_lge_facet_elements(mesh, scar_marker)
 
@@ -39,7 +49,6 @@ def facetsplit_mesh(mesh,
 	#Map intesity data into facets
 	lge_facet_intense = facet_intensities[local_global_facetmap]
 	lge_facet_intense = relative_intensity(lge_facet_intense, lge_facet_intense.min())
-
 	lge_facet_fibres = mean_direction(mesh.fibres[lge_facet_elems])
 
 	if mesh.edim == 3:
@@ -63,10 +72,12 @@ def facetsplit_mesh(mesh,
 	p = maxden*(costheta**anisotropy)*lge_facet_intense
 	#--------------------------------------------
 
+	assert not np.isnan(p).any()
+
 	#Determine which facets are to be split
 	is_split_facet = p >= np.random.rand(len(p))
+	#from IPython import embed; embed()
 	split_facets = lge_facets[is_split_facet]
-
 	return split_mesh_along_facets(mesh, split_facets)
 
 def relative_intensity(intensities, baseline):
@@ -140,7 +151,7 @@ class ImageMeshLgeRegistration(object):
 
 		self.lge_intensities = np.zeros(self.imdata.shape)
 		self.lge_intensities[self.segdata == scar_marker] = self.imdata[self.segdata == scar_marker]
-		self.lge_intensities = extrapolate_image(self.lge_intensities)
+		self.lge_intensities = self.extrapolate_image(self.lge_intensities)
 	
 		assert scar_marker in np.unique(mesh.elem_markers)
 		self.lge_elemnums = np.where(mesh.elem_markers == scar_marker)[0]
@@ -161,6 +172,24 @@ class ImageMeshLgeRegistration(object):
 			return self.lge_intensities[voxnums[0], voxnums[1]]
 		elif self.d == 3:
 			return self.lge_intensities[voxnums[0], voxnums[1], voxnums[2]]
+
+	def extrapolate_image(self, image):
+		KERNEL_SIZE = 7
+
+		bin_image = np.zeros(image.shape)
+		bin_image[image  > MARK_BACKGROUND] = 1
+
+		#This determines the extent of the extrapolation
+		kernel = np.ones([KERNEL_SIZE]*len(bin_image.shape))
+	
+		num_neighbours = convolve(bin_image, kernel, mode = "constant", cval = 0)
+
+		num_neighbours[num_neighbours == 0] = 1
+		extrapolated = convolve(image, kernel)/num_neighbours #Mean of nonzero neighbour values
+
+		#Put original intensity values back into extrapolated image
+		extrapolated[image != MARK_BACKGROUND] = image[image != MARK_BACKGROUND]
+		return extrapolated
 
 class Im2MeshCoord2d(object):
 	"""

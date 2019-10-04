@@ -17,6 +17,8 @@ def split_mesh_along_facets(mesh,
 	via a single node and should be included.
 	"""
 
+	assert len(split_facets) > 0
+
 	t0_total = time.time()
 
 	edim = mesh.elems.shape[1]
