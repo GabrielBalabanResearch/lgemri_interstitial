@@ -36,10 +36,10 @@ To see a list of the script command line options write
 
 Running the script without any parameters will analyze the data in the 'example_inputs' folder. This should 
 create a mesh similar to the one in 'example_output'. Also in the 'example_output' are .xdmf files 
-which can be used to visualize the example mesh in paraview. These files can be freely modified if you want to used 
+which can be used to visualize the example mesh in paraview. These files can be freely modified if you want to use
 them to visualize your own meshes.  
 
-If you want to modify the create_split_network.py script to work with some other mesh formats. Please see the class H5Format in 'src/meshdata.py', which can serve as template for another mesh format input/output class.
+If you want to modify the script 'create_split_network.py' to work with other mesh formats, please see the class 'H5Format' in 'src/meshdata.py', which can serve as a template for other mesh input/output classes.
 
 # Known compatible dependencies
 
@@ -52,7 +52,6 @@ If you want to modify the create_split_network.py script to work with some other
 * h5py 2.6.0
 * networkx 1.10
 * paraview 5.3.0 (for xdmf file visualization)
-
 
 # Lisence 
 CC-BY 4.0 or later version (https://creativecommons.org/licenses/)
