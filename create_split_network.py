@@ -46,6 +46,6 @@ if __name__ == "__main__":
 	fibrosisgroup.add_argument("-maxden",
 								 default = 1.0,
 								 type = float,
-								 help = "Maximum global scar density parameters (default 1.0).")
+								 help = "Maximum global scar density parameter (default 1.0).")
 	args = parser.parse_args()
 	main(args)
