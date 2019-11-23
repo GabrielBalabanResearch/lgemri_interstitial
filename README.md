@@ -5,12 +5,10 @@ local no-flux boundaries which disrupt the flow of electricity (reference upcomi
 
 The cracks are created with the following probability
 
-p = &alpha; I cos(&theta;)<sup>n</sup>
+p = &rho; I cos<sup>&a;</sup>(&theta;)
 
-where &alpha; is the global crack density, I the local normalized image intensity, and n, the 
-anisotropy parameter. You can change the parameteres &alpha; and n yourself to get different patterns of cracks.
-The quantity I is determined from the input images, and is the max-min normalized intensity in the areas marked 
-as scars. 
+where &rho; is the global crack density, I the local normalized image intensity, and n, the 
+anisotropy parameter. You can change the parameteres &rho; and &a; yourself to get different patterns of cracks. The quantity I is determined from the input images, and is the max-min normalized intensity in the areas marked as scars. 
 
 # Tests
 A few unit-tests are present that check the facet and edge splitters against some simple cases. To
