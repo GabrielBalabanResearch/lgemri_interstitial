@@ -8,7 +8,7 @@ The cracks are created with the following probability
 p = &rho; I cos<sup>&alpha;</sup>(&theta;)
 
 where &rho; is the global crack density, I the local normalized image intensity, and &alpha;, the 
-anisotropy parameter. You can change the parameteres &alpha; and a yourself to get different patterns of cracks. The quantity I is determined from the input images, and is the max-min normalized intensity in the areas marked as scars. 
+anisotropy parameter. You can change the parameteres &rho; and &alpha; yourself to get different patterns of cracks. The quantity I is determined from the input images, and is the max-min normalized intensity in the areas marked as scars. 
 
 # Tests
 A few unit-tests are present that check the facet and edge splitters against some simple cases. To
