@@ -52,7 +52,7 @@ If you want to modify the script 'create_split_network.py' to work with other me
 * paraview 5.3.0 (for xdmf file visualization)
 
 # Citations
-The original DFE method was developed in 
+The original crack generation method was developed in 
 
 	Costa, Caroline Mendonca, et al. "An efficient finite element approach for modeling fibrotic clefts in the heart." IEEE Transactions on Biomedical Engineering 61.3 (2013): 900-910.
 
