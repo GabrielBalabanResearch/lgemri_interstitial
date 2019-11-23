@@ -1,6 +1,6 @@
 # What this script does
 This repository provides a script that creates a series of cracks in a triangular or tetrahedral mesh that serve as a model for interstitial fibrosis. Each crack is a mesh edge (2D) or facet (3D) whose nodes are doubled.
-If an electrical PDE such as the monodomain equation is solved over the mesh than the cracks are effectively
+If an electrical PDE such as the monodomain equation is solved over the mesh then the cracks are effectively
 local no-flux boundaries which disrupt the flow of electricity (reference upcoming paper).
 
 The cracks are created with the following probability
