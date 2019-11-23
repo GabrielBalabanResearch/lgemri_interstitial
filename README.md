@@ -20,7 +20,7 @@ run the tests use the command
 You will need a medical image and it's segmentation in nifti format, as well as a mesh whose coordinates 
 match the world coordinates in the images (e.g. pixels locations transformed by the affine transformation matrix.) 
 
-![Example images](/images/example_images.png)
+![Example images](/images/example_ims.png)
 
 The segmentation should mark the myocardium and the scar with seperate markers. All areas that are not myocardium or scar should be marked 0. The mesh should be formatted as in 'example_inputs/imageslice_mesh.h5': it should have coordinates, element markers, fibres, and topology. The elements markers should be 0 for nonscar and scar should be marked as in the segmentation image. The fibres are a vector field giving the direction of anisotropy. Cracks will be more likely to occur if the mesh entity is aligned with this direction. The topology is how the coordinates are connected (triangles or tetrahedra).
 
