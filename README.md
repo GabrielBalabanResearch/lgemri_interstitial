@@ -58,8 +58,10 @@ Costa, Caroline Mendonca, et al. "An efficient finite element approach for model
 
 For the extension with topological analysis please cite
 
-Balaban G, et al. "3D Electrophysiological Modeling of InterstitialFibrosis Networks and Their Role in VentricularArrhythmias in Non-ischemic Cardiomyopathy." IEEE Transactions on Biomedical Engineering (upcoming).
-DOI 0.1109/TBME.2020.2976924 
+[Balaban G, et al. "3D Electrophysiological Modeling of InterstitialFibrosis Networks and Their Role in VentricularArrhythmias in Non-ischemic Cardiomyopathy." IEEE Transactions on Biomedical Engineering.
+vol. 67, no. 11, pp. 3125-3133, Nov. 2020, doi: 10.1109/TBME.2020.2976924](https://ieeexplore.ieee.org/document/9056546)
+
+
 
 
 # Lisence 
